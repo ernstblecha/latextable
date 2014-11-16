@@ -4,30 +4,33 @@
 \usepackage{booktabs}
 \usepackage{siunitx}
 
-
 \begin{document}
-
 \sisetup{
 table-number-alignment = center,
-table-text-alignment = center,
-table-unit-alignment = center,
+table-text-alignment  = center,
+table-unit-alignment  = center,
 table-figures-integer = 3,
 table-figures-decimal = 0,
-round-mode=places,
-round-precision=0
+round-mode            = places,
+round-precision       = 0
 }
+
 \input{testtable1.tex}
 
-
 \sisetup{
-table-number-alignment = center,
-table-text-alignment = center,
-table-unit-alignment = center,
-table-figures-integer = 5,
-table-figures-decimal = 3,
-round-mode=places,
-round-precision=3
+table-figures-decimal = 2,
+table-figures-integer = 1,
+round-precision       = 2
 }
+
 \input{testtable2.tex}
+
+\input{testtable3.tex}
+
+\input{testtable4.tex}
+
+\input{testtable5.tex}
+
+A reference to table \ref{table5}
 
 \end{document}
