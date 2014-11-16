@@ -82,7 +82,7 @@ function [ s ] = latexTableInt(tablehead, tabledata, caption, label, settings)
             error('invalid cell array for column headings and line labels');
         end
     elseif length(tablehead) > 0
-        [wt ht] = size(tablehead);
+        [ht wt] = size(tablehead);
         if wt == w && ht == 1
             tableheadhead = tablehead;
             tableheadline = {};
