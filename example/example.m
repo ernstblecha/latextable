@@ -8,6 +8,12 @@ function [  ] = example(  )
 
     sa('testtable2.tex',latexTable({'abc'; 'def'}, rand(2,4),'The second table'));
     
+    sa('testtable3.tex',latexTable({{'abc','def','ghi', 'jkl'},{'mno';'pqr'}}, rand(2,4),'The third table'));
+    
+    sa('testtable4.tex',latexTable({{},{}}, rand(2,4),'The fourth table'));
+        
+    sa('testtable5.tex',latexTable({{},{}}, rand(2,4),'The fifth table','table5',struct('leftsep','|','rightsep','|')));
+    
     path(p);
     
 end
