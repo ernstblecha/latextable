@@ -165,6 +165,15 @@ function [ s ] = latexTableInt(tablehead, tabledata, caption, label, settings)
                     ),tabledata(end,:))...
             );
 
-    s = sprintf(m(settings.tableformat), caption, label, columns, s, t);
+    s = ssprintf(settings.tableformat, caption, label, columns, s, t);
 
+end
+
+function [ s ] = ssprintf( s, varargin )
+    for i = 1:numel(varargin)
+        if ~ischar(cell2mat(varargin(i)))
+            error(['invalid string for replacement: ' i ': ' cell2mat(varargin(i))]);
+        end
+        s = strrep(s, ['%' num2str(i) '$s'], cell2mat(varargin(i)));
+    end
 end
