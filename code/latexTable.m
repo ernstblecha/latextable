@@ -158,6 +158,11 @@ function [ s ] = latexTableInt(tablehead, tabledata, caption, label, settings)
         end
     end
     seperators{w} = [tab m('\\') nl];
+    if hh == h
+        line = [m(tableheadline{end}) tab '&'];
+    else
+        line = '';
+    end
     t = strcat(t,...
             sprintf(...
              sprintf( [nl m('%s')]...
