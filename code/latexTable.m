@@ -174,11 +174,50 @@ function [ s ] = latexTableInt(tablehead, tabledata, caption, label, settings)
 
 end
 
-function [ s ] = ssprintf( s, varargin )
-    for i = 1:numel(varargin)
-        if ~ischar(cell2mat(varargin(i)))
-            error(['invalid string for replacement: ' i ': ' cell2mat(varargin(i))]);
+function [ output ] = ssprintf( string, varargin )
+%ssprintf implements position identifiers (n$) for octave
+
+    if isOctave()
+        f = '';
+        d = {};
+        i=1;
+
+        if string(1) ~= '%'
+            [f,r] = strtok(string, '%');
+        else
+            r = string;
         end
-        s = strrep(s, ['%' num2str(i) '$s'], cell2mat(varargin(i)));
+
+        while ~isempty(r)
+            [s,r] = strtok(r, '%');
+            n=sscanf(s,'%lu$%s',[1,2]);
+            if size(n) < 2
+                m=i;
+            else
+                m=n(1);
+                s=char(n(2:end));
+            end
+            if m < 1 || m > max(size(varargin))
+                d{i} = '';
+            else
+                d{i} = varargin{m};
+            end
+            f = strcat(f,'%',s);
+            i=i+1;
+        end
+
+        output = sprintf(f, d{:});
+    else
+        output = sprintf(string,varargin{:});
     end
+end
+
+function retval = isOctave
+  persistent cacheval;  % speeds up repeated calls
+
+  if isempty (cacheval)
+    cacheval = (exist ('OCTAVE_VERSION', 'builtin') > 0);
+  end
+
+  retval = cacheval;
 end
