@@ -170,7 +170,7 @@ function [ s ] = latexTableInt(tablehead, tabledata, caption, label, settings)
                     ),tabledata(end,:))...
             );
 
-    s = ssprintf(settings.tableformat, caption, label, columns, s, t);
+    s = ssprintf(m(settings.tableformat), caption, label, columns, s, t);
 
 end
 
@@ -190,7 +190,7 @@ function [ output ] = ssprintf( string, varargin )
 
         while ~isempty(r)
             [s,r] = strtok(r, '%');
-            n=sscanf(s,'%lu$%s',[1,2]);
+            n=sscanf(s,'%lu$%4096c',[1,4096]);
             if size(n) < 2
                 m=i;
             else
